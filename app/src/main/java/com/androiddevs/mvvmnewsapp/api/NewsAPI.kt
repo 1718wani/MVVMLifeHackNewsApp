@@ -7,9 +7,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsAPI {
-    //工夫を凝らしているポイント
+    //工夫を凝らしているポイント,
     @GET("v2/top-headlines")
     suspend fun getBreakingNews(
+        //このやりかたでカテゴリーを絞れているのかわからないので要確認
         @Query("category")
         category: String = "career",
         @Query("country")
