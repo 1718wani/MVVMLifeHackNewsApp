@@ -40,7 +40,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-    //データの各要素をテキストに変換してItemに放り込んでいる。
+    //データの各要素をテキストや画像に変換してItemに放り込んでいる。それによってレイアウト通りになって現れる
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
         holder.itemView.apply {
