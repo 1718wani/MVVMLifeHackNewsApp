@@ -13,8 +13,8 @@ interface NewsAPI {
         //このやりかたでカテゴリーを絞れているのかわからないので要確認
         //一旦この順番で引数とる必要があるっぽいのでカテゴリーで分けるのは中止。
         // ＃8でNewsViewModelを作ったタイミングで修正
-//        @Query("category")
-//        categoryName: String = "career",
+        @Query("category")
+        categoryName: String = "general",
         @Query("country")
         countryCode:String = "jp",
         @Query("page")
@@ -25,6 +25,8 @@ interface NewsAPI {
 
     @GET("v2/everything")
     suspend fun searchForNews(
+//        @Query("country")
+//        countryCode: String,
         @Query("q")
         searchQuery: String,
         @Query("page")

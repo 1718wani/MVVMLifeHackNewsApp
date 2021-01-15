@@ -2,6 +2,7 @@ package com.androiddevs.mvvmnewsapp.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 
 @Entity(
@@ -19,4 +20,4 @@ data class Article(
     val urlToImage: String,
     val publishedAt: String,
     val content: String
-)
+):Serializable
