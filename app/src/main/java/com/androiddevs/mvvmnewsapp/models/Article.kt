@@ -21,3 +21,4 @@ data class Article(
     val publishedAt: String,
     val content: String
 ):Serializable
+//Parsableにした場合はどうなるかについて考えてみる必要がありそう
