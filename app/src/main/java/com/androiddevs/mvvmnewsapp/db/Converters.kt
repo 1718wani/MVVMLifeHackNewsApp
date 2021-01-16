@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.androiddevs.mvvmnewsapp.models.Source
 
 class Converters{
-
+    //これの必要性や、どういうときに使えばいいかは勉強したい
     @TypeConverter
     fun fromSource(source: Source): String{
         return source.name

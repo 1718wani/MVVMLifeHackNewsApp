@@ -24,7 +24,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
             return oldItem == newItem
         }
     }
-
+    //結構ここらへん理解できていない。どうしてAsyncListDifferなんだろうか
     val differ = AsyncListDiffer(this,differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -41,11 +41,12 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         return differ.currentList.size
     }
     //データの各要素をテキストや画像に変換してItemに放り込んでいる。それによってレイアウト通りになって現れる
+    //これはOverrideだから基本的にはOnbindViewholderを使って一つひとつのアイテムに要素を放り込んでいく
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
         holder.itemView.apply {
             Glide.with(this).load(article.urlToImage).into(ivArticleImage)
-            tvSource.text = article.source.name
+            tvSource.text = article.source?.name
             tvTitle.text = article.title
             tvDescription.text = article.description
             tvPublishedAt.text = article.publishedAt

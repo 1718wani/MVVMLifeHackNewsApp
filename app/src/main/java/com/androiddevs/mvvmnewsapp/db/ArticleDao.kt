@@ -12,6 +12,7 @@ interface ArticleDao {
     @Query("SELECT * FROM articles")
     fun getAllArticles():LiveData<List<Article>>
 
+    //全選択ではなく任意のデータを消している
     @Delete
     suspend fun deleteArticle(article: Article)
 }

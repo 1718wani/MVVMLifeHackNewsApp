@@ -14,7 +14,9 @@ import com.androiddevs.mvvmnewsapp.models.Article
 
 @TypeConverters(Converters::class)
 abstract class ArticleDatabase : RoomDatabase(){
-
+    //特にメソッドを記載したり返り値がないためabstractになっている。
+    //アプリのRoom cannot verify the data integrity."はアプリ自体のデータをリフレッシュすることで解決
+    //逆にいったらVersion上げたりアップデートするときはこれを使う必要がある。
     abstract fun getArticleDao(): ArticleDao
 
     companion object{
