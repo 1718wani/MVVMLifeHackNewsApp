@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
-        android:name="com.androiddevs.mvvmnewsapp.ui.fragment.ArticleFragment"
+        android:name="com.androiddevs.mvvmnewsapp.ui.fragment.article.ArticleFragment"
         android:label="ArticleFragment" >
         <argument
             android:name="article"

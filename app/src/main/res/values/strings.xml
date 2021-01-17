@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MVVMNewsApp</string>
+    <string name="pick_on_finish_option">読了お疲れさまです!</string>
 </resources>

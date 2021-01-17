@@ -1,7 +1,9 @@
-package com.androiddevs.mvvmnewsapp.ui.fragment
+package com.androiddevs.mvvmnewsapp.ui.fragment.article
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.ViewTreeObserver
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -11,9 +13,11 @@ import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_article.*
 
+val TAG = "data"
 
 class ArticleFragment : Fragment(R.layout.fragment_article){
 
+    private lateinit var mOnScrollChangedListener: ViewTreeObserver.OnScrollChangedListener
 
     lateinit var viewModel : NewsViewModel
     //これ何者かよくわからんが、とにかくデータ引っ張ってくるのに役に立つような感じか
@@ -30,10 +34,21 @@ class ArticleFragment : Fragment(R.layout.fragment_article){
 
         //ここでデータをSeleazablにしておいているからアクセスできているという認識でいいか
         val article = args.article
-        webView.apply {
+        val webMyView = webView.apply {
             webViewClient = WebViewClient()
             loadUrl(article.url)
         }
+        webMyView.viewTreeObserver.addOnScrollChangedListener{
+            //一番最初に!をつけないといけないよ
+            if(!webMyView.canScrollVertically(1)){
+                Log.d("TAG","ページが下までいきました")
+                //Pickerを表示するメソッドを記載。
+                val dialog = onFinishOptionDialogFragment()
+                dialog.show(childFragmentManager,"TAG")
+            }
+        }
+
+
 
         fab.setOnClickListener{
             viewModel.saveArticle(article)
