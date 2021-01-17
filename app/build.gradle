@@ -62,13 +62,15 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
 
     // Retrofit
-    // moshiを導入することも検討 https://qiita.com/hiesiea/items/d1d8fff1d4a4ed12fbfb
+    // Moshi導入済み
+
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
     // Navigation Components
+
     implementation "androidx.navigation:navigation-fragment-ktx:2.2.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.2.1"
 

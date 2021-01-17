@@ -17,7 +17,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article){
 
     lateinit var viewModel : NewsViewModel
     //これ何者かよくわからんが、とにかくデータ引っ張ってくるのに役に立つような感じか
-    //発動条件がなにかがいまいちわからない。Codelabのサンプルにもあった
+    //発動条件がなにかがいまいちわからない。CodeArgslabのサンプルにもあった
     val args: ArticleFragmentArgs by navArgs()
     //↑これに関しては、ナビゲーションで移動用に存在しているみたい
 
