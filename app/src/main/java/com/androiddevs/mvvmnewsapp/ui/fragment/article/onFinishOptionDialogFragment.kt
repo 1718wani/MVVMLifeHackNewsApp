@@ -37,7 +37,7 @@ class onFinishOptionDialogFragment : DialogFragment() {
                             val opitons = resources.getStringArray(R.array.arrayOnFinishOption)
                             println(opitons[which])
                         })
-            //これの意味はわかっていない。
+            //これの意味は正確にはわかっていない。
             isCancelable = true
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

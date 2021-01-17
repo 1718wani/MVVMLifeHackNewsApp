@@ -37,7 +37,11 @@ class ArticleFragment : Fragment(R.layout.fragment_article){
         val webMyView = webView.apply {
             webViewClient = WebViewClient()
             loadUrl(article.url)
+            settings.javaScriptEnabled = true
+            settings.displayZoomControls = true
         }
+
+
         webMyView.viewTreeObserver.addOnScrollChangedListener{
             //一番最初に!をつけないといけないよ
             if(!webMyView.canScrollVertically(1)){
