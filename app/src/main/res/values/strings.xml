@@ -5,5 +5,7 @@
     <string name="tweet">Tweet</string>
     <string name="memo">メモ</string>
     <string name="quit">戻る</string>
+    <string name="shared_score">ユーザーの成長度</string>
+
 
 </resources>

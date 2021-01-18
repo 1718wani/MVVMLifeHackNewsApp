@@ -1,9 +1,11 @@
 package com.androiddevs.mvvmnewsapp.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,13 +25,20 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news){
 
     lateinit var viewModel : NewsViewModel
     lateinit var newsAdapter: NewsAdapter
+    lateinit var textread: TextView
 
     val TAG = "BreakingNewsFragment"
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
+
+        //DataStoreという名前でインスタンスを作成
+        val dataStore = activity?.getSharedPreferences("DataStore",Context.MODE_PRIVATE)
+        textread = view.findViewById(R.id.growthNumber)
+
 
 
         //Dataの受け渡しにも色々ある。PutExtraなど

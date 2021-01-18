@@ -119,7 +119,7 @@ class NewsViewModel(
         try {
             if (hasInternetConnection()) {
                 val response = newsRepository.searchNews(searchQuery, searchNewsPage)
-                searchNews.postValue(handleBreakingNewsResponse(response))
+                searchNews.postValue(handleSearchNewsResponse(response))
             }else{
                 searchNews.postValue(Resource.Error("インターネット接続がありません"))
             }
