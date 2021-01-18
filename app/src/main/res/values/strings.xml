@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MVVMNewsApp</string>
-    <string name="pick_on_finish_option">読了お疲れさまです!</string>
+    <string name="title">読了お疲れさまです!</string>
+    <string name="message">ぜひ感想をシェアしましょう！</string>
+    <string name="tweet">Tweet</string>
+    <string name="memo">メモ</string>
+    <string name="quit">戻る</string>
+
 </resources>

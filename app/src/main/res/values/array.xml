@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="arrayOnFinishOption">
-        <item>Tweetする</item>
-        <item>メモに記録する</item>
-        <item>今回はやめておく</item>
-    </string-array>
-</resources>
