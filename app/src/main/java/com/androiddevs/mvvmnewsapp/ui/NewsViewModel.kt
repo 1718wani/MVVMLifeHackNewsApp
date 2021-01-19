@@ -35,6 +35,8 @@ class NewsViewModel(
     var searchNewsPage = 1
     var searchNewsResponse: NewsResponse? = null
 
+
+
     init {
         // CategoryをBusinessに事前に指定
         getBreakingNews("general","jp")

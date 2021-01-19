@@ -68,9 +68,12 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
+    //Datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha01"
+
     //Preference
-    def preference_version = "1.1.1"
-    implementation "androidx.preference:preference-ktx:$preference_version"
+//    def preference_version = "1.1.1"
+//    implementation "androidx.preference:preference-ktx:$preference_version"
 
     // Navigation Components
 

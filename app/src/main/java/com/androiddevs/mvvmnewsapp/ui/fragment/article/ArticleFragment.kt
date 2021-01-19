@@ -75,8 +75,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article)
                             startActivity(intent)
                         }else{
                             Toast.makeText(context, "Twitterがインストールされていません。", Toast.LENGTH_LONG).show()
-                            val intent =
-                                Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.twitter.android&hl=ja&gl=US"))
+//                            Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.twitter.android&hl=ja&gl=US"))
                         }
                     }
 
