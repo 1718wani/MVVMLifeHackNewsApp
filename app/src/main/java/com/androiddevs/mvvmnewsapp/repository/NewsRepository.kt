@@ -3,6 +3,7 @@ package com.androiddevs.mvvmnewsapp.repository
 import com.androiddevs.mvvmnewsapp.api.RetrofitInstance
 import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
 import com.androiddevs.mvvmnewsapp.models.Article
+import java.lang.StringBuilder
 
 
 //設計： Retrofitから引っ張ってくるファンクションも、データベースを操作するファンクションもこちらに記載。
@@ -24,6 +25,9 @@ class NewsRepository(
     suspend fun upsert(article: Article) = db.getArticleDao().upsert(article)
 
     fun getSavedNews() = db.getArticleDao().getAllArticles()
+
+    fun getSpecifiedUrlNews(specifiedUrl: String) = db.getArticleDao().getAllArticlesUrl(specifiedUrl)
+
 
     suspend fun deleteArticle(article: Article) = db.getArticleDao().deleteArticle(article)
 

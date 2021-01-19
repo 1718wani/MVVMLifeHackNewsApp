@@ -102,8 +102,14 @@ class NewsViewModel(
     }
 
     fun saveArticle(article: Article) = viewModelScope.launch {
+//        val allarticles = newsRepository.getSavedNews().value
         newsRepository.upsert(article)
     }
+//    fun isSameArticle(article: Article,specifiedUrl: String):Boolean  = viewModelScope.launch {
+//        val getnewsUrl = article.url
+//        if (newsRepository.getSpecifiedUrlNews(specifiedUrl) = null)
+//    }
+
     //getSavednews()によって登録されているデータベースすべて引っ張ってきている。
     // データベースを選択しているだけでデータベースをいじっていないからCoroutineに入っていない？。
     fun getSavedNews() = newsRepository.getSavedNews()

@@ -14,7 +14,7 @@ interface NewsAPI {
         //一旦この順番で引数とる必要があるっぽいのでカテゴリーで分けるのは中止。
         // ＃8でNewsViewModelを作ったタイミングで修正
         @Query("category")
-        categoryName: String = "general",
+        categoryName: String = "general" ,
         @Query("country")
         countryCode:String = "jp",
         @Query("page")

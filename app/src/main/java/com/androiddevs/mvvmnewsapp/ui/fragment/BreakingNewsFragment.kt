@@ -21,6 +21,7 @@ import com.androiddevs.mvvmnewsapp.util.Resource
 import kotlinx.android.synthetic.main.fragment_breaking_news.*
 
 
+
 class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news){
 
     lateinit var viewModel : NewsViewModel
@@ -38,6 +39,8 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news){
         //DataStoreという名前でインスタンスを作成
         val dataStore = activity?.getSharedPreferences("DataStore",Context.MODE_PRIVATE)
         textread = view.findViewById(R.id.growthNumber)
+        //dataStoreがnullなら1を返す。nullだった場合はデータストアに入っている数値を返すという処理にする
+        textread.text = "1"
 
 
 
