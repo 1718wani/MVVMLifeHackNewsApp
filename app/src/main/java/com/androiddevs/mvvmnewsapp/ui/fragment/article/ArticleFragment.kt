@@ -4,6 +4,7 @@ package com.androiddevs.mvvmnewsapp.ui.fragment.article
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.navArgs
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
+import com.androiddevs.mvvmnewsapp.util.packagecheck.Companion.isApplicationInstalled
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_article.*
 
@@ -63,6 +65,21 @@ class ArticleFragment : Fragment(R.layout.fragment_article)
                 val dialog = onFinishOptionDialogFragment()
                 dialog.setListener(object :
                     onFinishOptionDialogFragment.onFinishOptionDialogLister {
+
+                    override fun onDialogTweetClick(dialog: DialogFragment) {
+                        if (isApplicationInstalled(this@ArticleFragment.requireContext(),"com.twitter.android") ) {
+                            val intent = Intent(Intent.ACTION_SEND)
+                            intent.setPackage("com.twitter.android")
+                            intent.type = "text/plain"
+                            intent.putExtra(Intent.EXTRA_TEXT, "$url" )
+                            startActivity(intent)
+                        }else{
+                            Toast.makeText(context, "Twitterがインストールされていません。", Toast.LENGTH_LONG).show()
+                            val intent =
+                                Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.twitter.android&hl=ja&gl=US"))
+                        }
+                    }
+
                     override fun onDialogMemoClick(dialog: DialogFragment) {
                         val sendIntent: Intent = Intent().apply {
                             action = Intent.ACTION_SEND
@@ -73,9 +90,6 @@ class ArticleFragment : Fragment(R.layout.fragment_article)
                         startActivity(shareIntent)
                     }
 
-                    override fun onDialogTweetClick(dialog: DialogFragment) {
-
-                    }
                 })
                 dialog.show(childFragmentManager,TAG)
             }
@@ -88,34 +102,6 @@ class ArticleFragment : Fragment(R.layout.fragment_article)
     }
 
 //    fun huga(){
-//
-//    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("TAG","今onpausedだよ")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("TAG","今onStopだよ")
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
