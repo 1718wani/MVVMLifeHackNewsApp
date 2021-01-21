@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">MVVMNewsApp</string>
+    <string name="app_name">News1.001</string>
     <string name="title">読了お疲れさまです!</string>
     <string name="message">ぜひ感想をシェアしましょう！</string>
     <string name="tweet">Tweet</string>
     <string name="memo">メモ</string>
     <string name="quit">戻る</string>
     <string name="shared_score">ユーザーの成長度</string>
-
-
+    <string name="growthtitle">成長しました！</string>
+    <string name="ClearBtnText">クリア</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.androiddevs.mvvmnewsapp.ui.fragment
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -26,23 +28,40 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news){
 
     lateinit var viewModel : NewsViewModel
     lateinit var newsAdapter: NewsAdapter
-    lateinit var textread: TextView
+//    lateinit var textread: TextView
 
-    val TAG = "BreakingNewsFragment"
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
+//        val button : Button = view.findViewById(R.id.DataClearBtn)
+
 
         //DataStoreという名前でインスタンスを作成
         val dataStore = activity?.getSharedPreferences("DataStore",Context.MODE_PRIVATE)
-        textread = view.findViewById(R.id.growthNumber)
-        //dataStoreがnullなら1を返す。nullだった場合はデータストアに入っている数値を返すという処理にする
-        textread.text = "1"
 
-
+        val str : String? = dataStore?.getString("input","1")
+        if (str != null){
+            val textread:TextView = view.findViewById(R.id.growthNumber)
+            textread.text = str
+        }else{
+            val textread:TextView = view.findViewById(R.id.growthNumber)
+            textread.text = "1"
+        }
+//        button.setOnClickListener {
+//            if (dataStore != null) {
+//                dataStore.edit().apply{
+//                    putString("input","1")
+//                }
+//
+//            }else{
+//                Toast.makeText(activity,"クリアできません",Toast.LENGTH_LONG).show()
+//            }
+//
+//        }
 
         //Dataの受け渡しにも色々ある。PutExtraなど
         newsAdapter.setOnItemClickListener {
@@ -55,6 +74,8 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news){
             )
 
         }
+
+
 
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer {response ->
             when(response){
@@ -98,7 +119,6 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news){
     var isLastPage = false
     var isScrolling = false
 
-    //このスクロールリスナー実装部分で、ポップアップを出す位置とか調整できそうな気がする。
     val scrollListener = object : RecyclerView.OnScrollListener(){
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

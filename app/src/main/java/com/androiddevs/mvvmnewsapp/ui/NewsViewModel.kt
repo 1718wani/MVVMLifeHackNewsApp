@@ -6,15 +6,13 @@ import android.net.ConnectivityManager
 import android.net.ConnectivityManager.*
 import android.net.NetworkCapabilities.*
 import android.os.Build
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.androiddevs.mvvmnewsapp.NewsApplication
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
 import com.androiddevs.mvvmnewsapp.repository.NewsRepository
 import com.androiddevs.mvvmnewsapp.util.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
@@ -37,11 +35,15 @@ class NewsViewModel(
 
 
 
+
     init {
         // CategoryをBusinessに事前に指定
         getBreakingNews("general","jp")
 //        searchNews("jp","")
     }
+
+
+
 
     fun getBreakingNews(category:String, countryCode:String) = viewModelScope.launch {
         safeBreakingNewsCall("general","jp")
@@ -107,9 +109,16 @@ class NewsViewModel(
 //        val allarticles = newsRepository.getSavedNews().value
         newsRepository.upsert(article)
     }
-//    fun isSameArticle(article: Article,specifiedUrl: String):Boolean  = viewModelScope.launch {
+
+//    fun isSameArticle(article: Article,specifiedUrl: String):Boolean  {
 //        val getnewsUrl = article.url
-//        if (newsRepository.getSpecifiedUrlNews(specifiedUrl) = null)
+//        if (getSpecifiedUrlNews(specifiedUrl) = null){
+//
+//        }
+//    }
+//
+//    fun getSpecifiedUrlNews(specifiedUrl: String) :Boolean {
+//        if (newsRepository.getSpecifiedUrlNews(specifiedUrl) )
 //    }
 
     //getSavednews()によって登録されているデータベースすべて引っ張ってきている。

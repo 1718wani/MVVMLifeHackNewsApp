@@ -14,7 +14,7 @@ interface ArticleDao {
     fun getAllArticles():LiveData<List<Article>>
 
     @Query("SELECT * FROM articles WHERE url == :specifiedUrl ")
-    fun getAllArticlesUrl(specifiedUrl: String):LiveData<List<Article>>
+    fun getAllArticlesBasedOnUrl(specifiedUrl: String):LiveData<List<Article>>
 
 
     //全選択ではなく任意のデータを消している
