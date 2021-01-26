@@ -1,20 +1,18 @@
 package com.androiddevs.mvvmnewsapp.ui.fragment.article
 
 //import android.content.Context
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.util.Half.toFloat
 import android.util.Log
 import android.view.View
-import android.view.ViewTreeObserver
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.ui.NewsActivity
@@ -23,17 +21,12 @@ import com.androiddevs.mvvmnewsapp.util.packagecheck.Companion.isApplicationInst
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_article.*
 import java.lang.Double.parseDouble
-import java.lang.Long.parseLong
 import kotlin.math.floor
 
 
 val TAG = "data"
 
-class ArticleFragment : Fragment(R.layout.fragment_article)
-
-{
-
-
+class ArticleFragment : Fragment(R.layout.fragment_article) {
     lateinit var viewModel : NewsViewModel
     //これ何者かよくわからんが、とにかくデータ引っ張ってくるのに役に立つような感じか
     //発動条件がなにかがいまいちわからない。CodeArgslabのサンプルにもあった
@@ -64,13 +57,13 @@ class ArticleFragment : Fragment(R.layout.fragment_article)
             if(!webMyView.canScrollVertically(1)){
                 Log.d("TAG","ページが下までいきました")
                 //Pickerを表示するメソッドを記載。
-//                val dialog = AlertDialog.Builder
-//                val dialog = onFinishOptionDialogFragment(huga)
-                val fragmentTransaction = childFragmentManager.beginTransaction()
+//                val fragmentTransaction = childFragmentManager.beginTransaction()
                 val dialog = onFinishOptionDialogFragment()
                 dialog.setListener(object :
                     onFinishOptionDialogFragment.onFinishOptionDialogLister {
                     override fun onDialogTweetClick(dialog: DialogFragment) {
+                        dialog.dismissAllowingStateLoss()
+
                         if (isApplicationInstalled(this@ArticleFragment.requireContext(),"com.twitter.android") ) {
                             val intent = Intent(Intent.ACTION_SEND)
                             intent.setPackage("com.twitter.android")
@@ -82,7 +75,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article)
                             Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.twitter.android&hl=ja&gl=US"))
                         }
                         val intOriginalData = originalData?.let { parseDouble(it) }
-                        val multifiedData = intOriginalData?.times(1.1)
+                        val multifiedData = intOriginalData?.times(1.01)
                         val flooredData = multifiedData?.times(100.0)?.let { floor(it) }
                             ?.div(100.0)
 
@@ -102,28 +95,43 @@ class ArticleFragment : Fragment(R.layout.fragment_article)
                         startActivity(shareIntent)
 
                         val intOriginalData = originalData?.let { parseDouble(it) }
-                        val multifiedData = intOriginalData?.times(1.1)
+                        val multifiedData = intOriginalData?.times(1.01)
                         val flooredData = multifiedData?.times(100.0)?.let { floor(it) }
                             ?.div(100.0)
 
                         val stringmultifiedData = flooredData.toString()
                         postData?.putString("input", stringmultifiedData)
                         postData?.apply()
+
+                        dialog.dismissAllowingStateLoss()
+
+                    }
+
+                    override fun onDialogbackClick(dialog: DialogFragment) {
+                        dialog.dismissAllowingStateLoss()
+                        findNavController().popBackStack(R.id.breakingNewsFragment,false)
+
                     }
 
                 })
                 dialog.show(childFragmentManager,TAG)
-                fragmentTransaction.commitAllowingStateLoss()
+
+//                fragmentTransaction.commitAllowingStateLoss()
             }
         }
 
         fab.setOnClickListener{
-            viewModel.saveArticle(article)
-            Snackbar.make(view,"お気に入りに保存されました",Snackbar.LENGTH_SHORT).show()
+            //ここにif文の挿入
+            if (viewModel.notYetArticle(url)){
+                viewModel.saveArticle(article)
+                Snackbar.make(view,"お気に入りに保存されました",Snackbar.LENGTH_SHORT).show()
+
+            }else{
+                Snackbar.make(view,"すでにこの記事はお気に入りにあります。",Snackbar.LENGTH_SHORT).show()
+            }
+
         }
     }
-
-//    fun huga(){
 }
 
 

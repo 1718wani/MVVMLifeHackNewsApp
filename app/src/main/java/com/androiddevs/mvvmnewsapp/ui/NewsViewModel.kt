@@ -12,7 +12,6 @@ import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
 import com.androiddevs.mvvmnewsapp.repository.NewsRepository
 import com.androiddevs.mvvmnewsapp.util.Resource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
@@ -55,7 +54,6 @@ class NewsViewModel(
 
     fun searchNews(searchQuery : String) = viewModelScope.launch {
         safeSearchNewsCall(searchQuery)
-        //同じくこれは♯13より前
 //        searchNews.postValue(Resource.Loading())
 //        val response = newsRepository.searchNews(searchQuery,searchNewsPage)
 //        searchNews.postValue(handleSearchNewsResponse(response))
@@ -106,20 +104,17 @@ class NewsViewModel(
     }
 
     fun saveArticle(article: Article) = viewModelScope.launch {
-//        val allarticles = newsRepository.getSavedNews().value
         newsRepository.upsert(article)
     }
 
-//    fun isSameArticle(article: Article,specifiedUrl: String):Boolean  {
-//        val getnewsUrl = article.url
-//        if (getSpecifiedUrlNews(specifiedUrl) = null){
-//
-//        }
-//    }
-//
-//    fun getSpecifiedUrlNews(specifiedUrl: String) :Boolean {
-//        if (newsRepository.getSpecifiedUrlNews(specifiedUrl) )
-//    }
+    fun notYetArticle(specifiedUrl: String?):Boolean  {
+        val news  = newsRepository.getSpecifiedUrlNews(specifiedUrl)
+        val list = listOf(news)
+        var size = list.size
+        return size <= 1
+    }
+
+
 
     //getSavednews()によって登録されているデータベースすべて引っ張ってきている。
     // データベースを選択しているだけでデータベースをいじっていないからCoroutineに入っていない？。

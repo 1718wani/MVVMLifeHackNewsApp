@@ -26,6 +26,8 @@ class onFinishOptionDialogFragment : DialogFragment(){
     interface onFinishOptionDialogLister {
         fun onDialogTweetClick(dialog:DialogFragment)
         fun onDialogMemoClick(dialog:DialogFragment)
+        fun onDialogbackClick(dialog:DialogFragment)
+
     }
 
     public fun setListener(lister: onFinishOptionDialogLister){
@@ -61,7 +63,7 @@ class onFinishOptionDialogFragment : DialogFragment(){
                     // Neutralボタンがタップされたときに実行される処理
                         Toast.makeText(activity, "「無回答」がタップされた", Toast.LENGTH_SHORT).show()
                         //popBackStackとはなんぞや
-                        findNavController().popBackStack(R.id.breakingNewsFragment,false)
+                        mListener?.onDialogbackClick(this)
                      }
             //キャンセル可能にする
             isCancelable = true

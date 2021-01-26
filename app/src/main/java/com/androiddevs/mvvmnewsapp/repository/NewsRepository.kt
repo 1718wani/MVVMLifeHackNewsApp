@@ -8,8 +8,6 @@ import com.androiddevs.mvvmnewsapp.models.Article
 //設計： Retrofitから引っ張ってくるファンクションも、データベースを操作するファンクションもこちらに記載。
 //Daoにある文言とかを結局データベースを経由して作っている？（自信ない）
 
-const val PREFERENCE_NAME = "my_preference"
-
 class NewsRepository(
     val db: ArticleDatabase
 ) {
@@ -28,7 +26,7 @@ class NewsRepository(
     fun getSavedNews() = db.getArticleDao().getAllArticles()
 
     //特定のUrlで
-    fun getSpecifiedUrlNews(specifiedUrl: String) = db.getArticleDao().getAllArticlesBasedOnUrl(specifiedUrl)
+    fun getSpecifiedUrlNews(specifiedUrl: String?) = db.getArticleDao().getAllArticlesBasedOnUrl(specifiedUrl)
 
     suspend fun deleteArticle(article: Article) = db.getArticleDao().deleteArticle(article)
 
